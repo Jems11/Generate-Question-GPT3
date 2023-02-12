@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Content Generator Tool</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+<body>
+
+    <div class="container">
+        <div id="main" class="mt-5 mb-5">
+            <h2>Generate Question From Para: </h2>
+
+            <div class="row">
+                <div class="col-lg-6 blogTopic-Input-wrapper">
+                    <form action="" method="post">
+                        <div class="mb-3">
+                            <label for="blogPara" class="form-label frmlabel">Enter Your Para to generate
+                                Question</label>
+                            <textarea rows="10" cols="20" type="text" name="blogPara" id="blogPara" class="form-control mb-3"
+                                placeholder="Enter paragraph"></textarea>
+                            <label for="blogPara" class="form-label frmlabel">Enter any keyword you want</label>
+                            <input type="text" name="keyword" id="keyword" class="form-control"
+                            placeholder="Enter the keyword">
+                        </div>
+                        <input type="hidden" name="form1" value="form1">
+                        <button type="button" id="blogTopicbtn" class="btn btn-primary" onclick="GenerateQuestion()">Generate
+                            Questins</button>
+                    </form>
+                </div>
+                <div class="col-lg-6 blogTopic-result-wrapper">
+                    <div class="d-flex">
+                        <h5>Results : </h5><span> </span>
+                    </div>
+                    <div class="blogPara-Result">
+                        <p> </p>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <hr>
+            <br>
+            <!-- <div class="row">
+                <div class="col-lg-6 blogSection-Input-wrapper">
+                    <form action="/" method="post">
+                        <div class="mb-3">
+                            <label for="blogSection" class="form-label frmlabel">Blog title to generate blog section</label>
+                            <input type="text" name="blogSection" id="blogSection" class="form-control" placeholder="Enter a blog title to generate section">
+                        </div>
+                        <input type="hidden" name="form2" value="form2">
+                        <button id="blogSectionbtn" class="btn btn-primary">Generate Blog Sections</button>
+                    </form>
+                </div>
+                <div class="col-lg-6 blogSection-result-wrapper">
+                    <div class="d-flex"><h5>Results : </h5><span> {{ blogSectionprompt }}</span></div>
+                    <div class="blogSection-Result">
+                        <p>1. {{ blogSectionIdeas|safe }}</p>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <hr>
+            <br>
+            <div class="row">
+                <div class="col-lg-6 blogSectionContent-Input-wrapper">
+                    <form action="/" method="post">
+                        <div class="mb-3">
+                            <label for="blogSectionContent" class="form-label frmlabel">Blog section into Section content</label>
+                            <input type="text" name="blogSectionContent" id="blogSectionContent" class="form-control" placeholder="Enter a blog section to generate content">
+                        </div>
+                        <input type="hidden" name="form3" value="form3">
+                        <button id="blogSectionContentbtn" class="btn btn-primary">Generate Blog Sections</button>
+                    </form>
+                </div>
+                <div class="col-lg-6 blogSectionContent-result-wrapper">
+                    <div class="d-flex"><h5>Results : </h5><span> {{ blogSectionContentprompt }}</span></div>
+                    <div class="blogSectionContent-Result">
+                        <p>{{ blogSectionContent|safe }}</p>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+        </script>
+    <script>
+        function GenerateQuestion() {
+            var para = $("#blogPara").val();
+            var keyword = $("#keyword").val();
+            var jsondata = [
+                {"para":para,
+                "keyword":keyword}
+            ]
+            $.ajax({
+                url: '/result',
+                type: "POST",
+                data: JSON.stringify(jsondata),
+                contentType: "application/json",
+                success: function (data) {
+                    debugger
+                    var result = data.replaceAll("\n","<br>")
+                    $(".blogPara-Result").html(result);
+                },
+                error: function (error) {
+                    console.log(`Error ${error}`);
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

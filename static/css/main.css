@@ -1,0 +1,26 @@
+.blogTopic-Result,
+.blogSection-Result,
+.blogSectionContent-Result{
+    padding: 0 20px;
+    height: 270px;
+    overflow: auto;
+}
+
+.blogTopic-Input-wrapper,
+.blogSection-result-wrapper,
+.blogSectionContent-Input-wrapper{
+    background: aliceblue;
+    padding: 20px;
+}
+
+.blogTopic-result-wrapper,
+.blogSection-Input-wrapper,
+.blogSectionContent-result-wrapper{
+    background: lavender;
+    padding: 20px;
+}
+
+.frmlabel{
+    font-size: 24px;
+    font-weight: bold;
+}
